@@ -192,6 +192,7 @@ public class StaticWebApplicationContext extends StaticApplicationContext
 
 	@Override
 	protected void initPropertySources() {
+		logger.info("initPropertySources");
 		WebApplicationContextUtils.initServletPropertySources(getEnvironment().getPropertySources(),
 				this.servletContext, this.servletConfig);
 	}
