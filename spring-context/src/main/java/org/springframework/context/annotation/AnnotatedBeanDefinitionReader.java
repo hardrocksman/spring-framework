@@ -56,7 +56,7 @@ public class AnnotatedBeanDefinitionReader {
 	private BeanNameGenerator beanNameGenerator = new AnnotationBeanNameGenerator();
 
 	private ScopeMetadataResolver scopeMetadataResolver = new AnnotationScopeMetadataResolver();
-
+	// 这是用于做条件注解的
 	private ConditionEvaluator conditionEvaluator;
 
 

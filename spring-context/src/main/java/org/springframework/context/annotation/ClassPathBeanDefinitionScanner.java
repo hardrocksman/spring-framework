@@ -273,6 +273,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 		logger.info("doscan get all class in basePackages:" + basePackages);
 		Set<BeanDefinitionHolder> beanDefinitions = new LinkedHashSet<>();
 		for (String basePackage : basePackages) {
+			// 获取所有候选的bean
 			Set<BeanDefinition> candidates = findCandidateComponents(basePackage);
 			for (BeanDefinition candidate : candidates) {
 				ScopeMetadata scopeMetadata = this.scopeMetadataResolver.resolveScopeMetadata(candidate);
