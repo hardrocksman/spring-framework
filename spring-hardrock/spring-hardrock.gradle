@@ -2,6 +2,9 @@ dependencies {
     compile(project(":spring-core"))
     compile(project(":spring-context"))
     compile(project(":spring-jdbc"))
+    compile(project(":spring-aop"))
+
+    compile group: "org.aspectj", name: "aspectjweaver", version: "1.9.2"
 
     compile group: "com.mchange", name: "c3p0", version: "0.9.5.2"
     compile group: "mysql", name: "mysql-connector-java", version: "8.0.21"

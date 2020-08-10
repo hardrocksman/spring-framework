@@ -28,11 +28,12 @@ public class Test {
 		String result = helloService.sayHello("hard");
 		System.out.println("result:" + result);
 
-		OrderService orderService = ac.getBean(OrderService.class);
-
-		List<String> name = new ArrayList<String>();
-		name.add("123");
-		name.add("345");
-		orderService.saveOrders(name);
+		// 测试事务
+//		OrderService orderService = ac.getBean(OrderService.class);
+//
+//		List<String> name = new ArrayList<String>();
+//		name.add("123");
+//		name.add("345");
+//		orderService.saveOrders(name);
 	}
 }
