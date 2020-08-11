@@ -13,25 +13,25 @@ public class LogAspectsConfig {
 	public void pointCut(){};
 
 	//@before代表在目标方法执行前切入, 并指定在哪个方法前切入
-	@Before("pointCut()")
-	public void logStart(){
-		System.out.println("@Before before execute");
-	}
-
-	@After("pointCut()")
-	public void logEnd(){
-		System.out.println("@after after execute");
-	}
-
-	@AfterReturning("pointCut()")
-	public void logReturn(){
-		System.out.println("@After returning");
-	}
-
-	@AfterThrowing("pointCut()")
-	public void logException(){
-		System.out.println("@after throwing");
-	}
+//	@Before("pointCut()")
+//	public void logStart(){
+//		System.out.println("@Before before execute");
+//	}
+//
+//	@After("pointCut()")
+//	public void logEnd(){
+//		System.out.println("@after after execute");
+//	}
+//
+//	@AfterReturning("pointCut()")
+//	public void logReturn(){
+//		System.out.println("@After returning");
+//	}
+//
+//	@AfterThrowing("pointCut()")
+//	public void logException(){
+//		System.out.println("@after throwing");
+//	}
 
 	@Around("pointCut()")
 	public Object Around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
