@@ -47,7 +47,7 @@ import org.springframework.lang.Nullable;
  * @since 4.0
  */
 final class PostProcessorRegistrationDelegate {
-
+	private static Log logger = LogFactory.getLog(PostProcessorRegistrationDelegate.class);
 	private PostProcessorRegistrationDelegate() {
 	}
 
@@ -92,7 +92,18 @@ final class PostProcessorRegistrationDelegate {
 			}
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			registryProcessors.addAll(currentRegistryProcessors);
+
+			String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+			for (String beanDefinitionName : beanDefinitionNames) {
+				logger.info("already loaded bean:" +  beanDefinitionName);
+			}
+
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
+
+			beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+			for (String beanDefinitionName : beanDefinitionNames) {
+				logger.info("already loaded bean:" +  beanDefinitionName);
+			}
 			currentRegistryProcessors.clear();
 
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.

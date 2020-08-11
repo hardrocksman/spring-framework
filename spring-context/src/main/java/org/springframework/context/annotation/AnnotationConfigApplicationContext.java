@@ -20,6 +20,7 @@ import java.lang.annotation.Annotation;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.config.BeanDefinitionCustomizer;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.GenericApplicationContext;
@@ -85,7 +86,13 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
 		this();
+		logger.info("先加载我们初始化传入AnnotationConfigApplicationContext的参数。。。");
 		register(annotatedClasses);
+		ConfigurableListableBeanFactory beanFactory = this.getBeanFactory();
+		String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+		for (String beanDefinitionName : beanDefinitionNames) {
+			logger.info("already loaded bean:" +  beanDefinitionName);
+		}
 		refresh();
 	}
 
