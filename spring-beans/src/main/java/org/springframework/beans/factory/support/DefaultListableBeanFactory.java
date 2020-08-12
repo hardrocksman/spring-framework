@@ -334,6 +334,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 	@Override
 	public <T> T getBean(Class<T> requiredType) throws BeansException {
+		logger.info("get bean:" + requiredType.getSimpleName());
 		return getBean(requiredType, (Object[]) null);
 	}
 

@@ -25,6 +25,7 @@ public class Test {
 
 		AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
 		HelloService helloService = ac.getBean(HelloService.class);
+		System.out.println("get helloservice:" + helloService);
 		String result = helloService.sayHello("hard");
 
 //		result = helloService.sayBye("hard");
