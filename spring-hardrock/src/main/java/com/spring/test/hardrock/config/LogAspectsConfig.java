@@ -40,4 +40,15 @@ public class LogAspectsConfig {
 		System.out.println("@Arount:after execute...");
 		return obj;
 	}
+
+	@Pointcut("execution(* com.spring.test.hardrock.service.impl.TestAopServiceImpl.*(..))")
+	public void aopPointCut(){};
+
+	@Around("aopPointCut()")
+	public Object aopAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		System.out.println("@Arount:aopPointCut before execute...");
+		Object obj = proceedingJoinPoint.proceed();//相当于开始调div地
+		System.out.println("@Arount:aopPointCut after execute...");
+		return obj;
+	}
 }

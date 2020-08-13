@@ -3,6 +3,7 @@ package com.spring.test.hardrock;
 import com.spring.test.hardrock.config.TestConfig;
 import com.spring.test.hardrock.service.HelloService;
 import com.spring.test.hardrock.service.OrderService;
+import com.spring.test.hardrock.service.impl.TestAopServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,10 +25,13 @@ public class Test {
 //		System.out.println("result:" + result);
 
 		AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
-		HelloService helloService = ac.getBean(HelloService.class);
-		System.out.println("get helloservice:" + helloService);
-		String result = helloService.sayHello("hard");
+//		HelloService helloService = ac.getBean(HelloService.class);
+//		System.out.println("get helloservice:" + helloService);
+//		String result = helloService.sayHello("hard");
 
+		TestAopServiceImpl testAopService = ac.getBean(TestAopServiceImpl.class);
+		testAopService.hello("hard");
+		testAopService.bye("test");
 //		result = helloService.sayBye("hard");
 //		System.out.println("result:" + result);
 
