@@ -64,7 +64,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigApplicationContext() {
+		//为容器设置注解Bean定义读取器
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+		//为容器设置类路径Bean定义扫描器
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 
@@ -88,11 +90,13 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		this();
 		logger.info("先加载我们初始化传入AnnotationConfigApplicationContext的参数。。。");
 		register(annotatedClasses);
+
 		ConfigurableListableBeanFactory beanFactory = this.getBeanFactory();
 		String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
 		for (String beanDefinitionName : beanDefinitionNames) {
 			logger.info("already loaded bean:" +  beanDefinitionName);
 		}
+
 		refresh();
 	}
 
@@ -140,6 +144,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * <p>The default is an {@link AnnotationScopeMetadataResolver}.
 	 * <p>Any call to this method must occur prior to calls to {@link #register(Class...)}
 	 * and/or {@link #scan(String...)}.
+	 * //为容器的注解Bean读取器和注解Bean扫描器设置作用范围元信息解析器
 	 */
 	public void setScopeMetadataResolver(ScopeMetadataResolver scopeMetadataResolver) {
 		this.reader.setScopeMetadataResolver(scopeMetadataResolver);

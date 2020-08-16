@@ -258,6 +258,7 @@ public class AnnotatedBeanDefinitionReader {
 			@Nullable Class<? extends Annotation>[] qualifiers, BeanDefinitionCustomizer... definitionCustomizers) {
 		// 根据指定的注解Bean定义类，创建Spring容器中对注解Bean的封装的
 		logger.info("根据传入的一个配置类");
+		//根据指定的注解Bean定义类，创建Spring容器中对注解Bean的封装的数据结构
 		AnnotatedGenericBeanDefinition abd = new AnnotatedGenericBeanDefinition(annotatedClass);
 		if (this.conditionEvaluator.shouldSkip(abd.getMetadata())) {
 			return;
