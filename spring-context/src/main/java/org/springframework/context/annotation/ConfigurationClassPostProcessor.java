@@ -276,6 +276,11 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		// Return immediately if no @Configuration classes were found
 		if (configCandidates.isEmpty()) {
 			return;
+		} else {
+			logger.info("-----------get all candidate configs:");
+			for(BeanDefinitionHolder beanDefinitionHolder : configCandidates) {
+				logger.info("--------------candidate config:" + beanDefinitionHolder.getBeanName());
+			}
 		}
 
 		// Sort by previously determined @Order value, if applicable
