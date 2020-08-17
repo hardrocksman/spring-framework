@@ -94,7 +94,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		ConfigurableListableBeanFactory beanFactory = this.getBeanFactory();
 		String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
 		for (String beanDefinitionName : beanDefinitionNames) {
-			logger.info("already loaded bean:" +  beanDefinitionName);
+			logger.info("after AnnotationConfigApplicationContext register already loaded bean:" +  beanDefinitionName);
 		}
 
 		refresh();
