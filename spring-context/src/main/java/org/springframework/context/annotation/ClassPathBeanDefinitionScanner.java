@@ -270,7 +270,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 */
 	protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
 		Assert.notEmpty(basePackages, "At least one base package must be specified");
-		logger.info("doscan get all class in basePackages:" + basePackages);
+		logger.info(".................doscan get all class in basePackages:" + basePackages);
 		Set<BeanDefinitionHolder> beanDefinitions = new LinkedHashSet<>();
 		for (String basePackage : basePackages) {
 			// 获取所有候选的bean

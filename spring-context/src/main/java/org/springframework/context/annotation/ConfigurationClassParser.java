@@ -280,6 +280,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @ComponentScan annotations
+		logger.info(".............process any @ComponentScan in class: " + sourceClass.toString());
 		Set<AnnotationAttributes> componentScans = AnnotationConfigUtils.attributesForRepeatable(
 				sourceClass.getMetadata(), ComponentScans.class, ComponentScan.class);
 		if (!componentScans.isEmpty() &&

@@ -520,7 +520,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// Tell the subclass to refresh the internal bean factory.
 
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
-			logger.info("init beanFactory:" + beanFactory.toString());
+			logger.info("...........init beanFactory:" + beanFactory.toString());
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
 
@@ -529,7 +529,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-				logger.info("I think it will load other bean here...........");
+				logger.info(".......................I think it will load other bean here...........");
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -697,7 +697,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @param beanFactory the bean factory used by the application context
 	 */
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
-		logger.info("postProcessBeanFactory");
+		logger.info("...............postProcessBeanFactory.........................");
 	}
 
 	/**
@@ -706,9 +706,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>Must be called before singleton instantiation.
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
-		logger.info("以下开始加载各种bean 藏的有点深");
+		logger.info("................以下开始加载各种bean 藏的有点深.................");
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
-		logger.info("bean factory post processors:" + getBeanFactoryPostProcessors());
+		logger.info("...............bean factory post processors:" + getBeanFactoryPostProcessors());
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime
 		// (e.g. through an @Bean method registered by ConfigurationClassPostProcessor)
 		if (beanFactory.getTempClassLoader() == null && beanFactory.containsBean(LOAD_TIME_WEAVER_BEAN_NAME)) {

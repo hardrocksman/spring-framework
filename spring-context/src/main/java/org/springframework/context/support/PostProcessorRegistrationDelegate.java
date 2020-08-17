@@ -82,6 +82,7 @@ final class PostProcessorRegistrationDelegate {
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
+			// 这个是register那一步注册进去的   系统自带的
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
@@ -95,7 +96,7 @@ final class PostProcessorRegistrationDelegate {
 
 			String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
 			for (String beanDefinitionName : beanDefinitionNames) {
-				logger.info("already loaded bean:" +  beanDefinitionName);
+				logger.info(".....................already loaded bean:" +  beanDefinitionName);
 			}
 
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
