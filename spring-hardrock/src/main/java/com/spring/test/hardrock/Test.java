@@ -37,10 +37,10 @@ public class Test {
 //		System.out.println("result:" + result);
 
 		// 测试事务
-//		OrderService orderService = ac.getBean(OrderService.class);
-//		List<String> name = new ArrayList<String>();
-//		name.add("123");
-//		name.add("345");
-//		orderService.saveOrders(name);
+		OrderService orderService = ac.getBean(OrderService.class);
+		List<String> name = new ArrayList<String>();
+		name.add("123");
+		name.add("345");
+		orderService.saveOrders(name);
 	}
 }
