@@ -3,7 +3,7 @@ package com.spring.test.hardrock.service.impl;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestAopServiceImpl {
+public class TestCglibAopServiceImpl {
 
 	public void hello(String name) {
 		this.bye(name);

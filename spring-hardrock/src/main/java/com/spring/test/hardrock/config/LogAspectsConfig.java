@@ -41,7 +41,7 @@ public class LogAspectsConfig {
 		return obj;
 	}
 
-	@Pointcut("execution(* com.spring.test.hardrock.service.impl.TestAopServiceImpl.*(..))")
+	@Pointcut("execution(* com.spring.test.hardrock.service.impl.TestCglibAopServiceImpl.*(..))")
 	public void aopPointCut(){};
 
 	@Around("aopPointCut()")

@@ -1,12 +1,9 @@
 package com.spring.test.hardrock;
 
 import com.spring.test.hardrock.config.TestConfig;
-import com.spring.test.hardrock.service.HelloService;
 import com.spring.test.hardrock.service.OrderService;
-import com.spring.test.hardrock.service.impl.TestAopServiceImpl;
-import org.springframework.context.ApplicationContext;
+import com.spring.test.hardrock.service.impl.TestCglibAopServiceImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +27,7 @@ public class Test {
 //		String result = helloService.sayHello("hard");
 
 		// 测试aop
-		TestAopServiceImpl testAopService = ac.getBean(TestAopServiceImpl.class);
+		TestCglibAopServiceImpl testAopService = ac.getBean(TestCglibAopServiceImpl.class);
 		testAopService.hello("hard");
 		testAopService.bye("test");
 //		result = helloService.sayBye("hard");
