@@ -171,12 +171,16 @@ public abstract class AnnotationConfigUtils {
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME));
+
+			logger.info("------------register system bean:" + ConfigurationClassPostProcessor.class);
 		}
 
 		if (!registry.containsBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME));
+
+			logger.info("------------register system bean:" + AutowiredAnnotationBeanPostProcessor.class);
 		}
 
 		// Check for JSR-250 support, and if present add the CommonAnnotationBeanPostProcessor.
@@ -184,6 +188,8 @@ public abstract class AnnotationConfigUtils {
 			RootBeanDefinition def = new RootBeanDefinition(CommonAnnotationBeanPostProcessor.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, COMMON_ANNOTATION_PROCESSOR_BEAN_NAME));
+
+			logger.info("------------register system bean:" + CommonAnnotationBeanPostProcessor.class);
 		}
 
 		// Check for JPA support, and if present add the PersistenceAnnotationBeanPostProcessor.
@@ -199,18 +205,24 @@ public abstract class AnnotationConfigUtils {
 			}
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, PERSISTENCE_ANNOTATION_PROCESSOR_BEAN_NAME));
+
+			logger.info("------------register system bean:" + PERSISTENCE_ANNOTATION_PROCESSOR_CLASS_NAME);
 		}
 
 		if (!registry.containsBeanDefinition(EVENT_LISTENER_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(EventListenerMethodProcessor.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, EVENT_LISTENER_PROCESSOR_BEAN_NAME));
+
+			logger.info("------------register system bean:" + EventListenerMethodProcessor.class);
 		}
 
 		if (!registry.containsBeanDefinition(EVENT_LISTENER_FACTORY_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(DefaultEventListenerFactory.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, EVENT_LISTENER_FACTORY_BEAN_NAME));
+
+			logger.info("------------register system bean:" + DefaultEventListenerFactory.class);
 		}
 
 		return beanDefs;
