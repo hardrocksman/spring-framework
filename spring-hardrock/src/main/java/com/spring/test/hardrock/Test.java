@@ -3,7 +3,9 @@ package com.spring.test.hardrock;
 import com.spring.test.hardrock.config.TestConfig;
 import com.spring.test.hardrock.service.OrderService;
 import com.spring.test.hardrock.service.impl.TestCglibAopServiceImpl;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;

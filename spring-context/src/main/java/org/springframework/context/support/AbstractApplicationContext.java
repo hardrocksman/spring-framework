@@ -626,7 +626,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void initPropertySources() {
 		// For subclasses: do nothing by default.
-		logger.info("initPropertySources");
+		logger.info("----------------initPropertySources");
 	}
 
 	/**

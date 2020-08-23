@@ -83,6 +83,13 @@ final class PostProcessorRegistrationDelegate {
 
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
 			// 这个是register那一步注册进去的   系统自带的
+			/**
+			 * 这里的逻辑应该是这样的  先根据初始化的时候加载到bean-definition的BeanDefinitionRegistryPostProcessor
+			 * 默认是这个org.springframework.context.annotation.ConfigurationClassPostProcessor 先去处理一次加载
+			 * 然后再根据加载到bean-definition的BeanDefinitionRegistryPostProcessor 这个时候估计就不是只有上面的，进行一次加载
+			 * 最后是一个while死循环 每次加载都有可能有新的BeanDefinitionRegistryPostProcessor 注入到bean-definition
+			 * 所以这里死循环直到加载到的BeanDefinitionRegistryPostProcessor全部处理了一次 才会结束
+ 			 */
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
@@ -99,6 +106,9 @@ final class PostProcessorRegistrationDelegate {
 				logger.info(".....................already loaded bean:" +  beanDefinitionName);
 			}
 
+			for (BeanDefinitionRegistryPostProcessor postProcessor : currentRegistryProcessors) {
+				logger.info("--------------第一次解析BeanDefinitionRegistryPostProcessor：" + postProcessor.getClass());
+			}
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 
 			beanDefinitionNames = beanFactory.getBeanDefinitionNames();
@@ -117,11 +127,16 @@ final class PostProcessorRegistrationDelegate {
 			}
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			registryProcessors.addAll(currentRegistryProcessors);
+
+			for (BeanDefinitionRegistryPostProcessor postProcessor : currentRegistryProcessors) {
+				logger.info("--------------第二次解析BeanDefinitionRegistryPostProcessor：" + postProcessor.getClass());
+			}
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
 			// Finally, invoke all other BeanDefinitionRegistryPostProcessors until no further ones appear.
 			boolean reiterate = true;
+			int index = 3;
 			while (reiterate) {
 				reiterate = false;
 				postProcessorNames = beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
@@ -134,8 +149,13 @@ final class PostProcessorRegistrationDelegate {
 				}
 				sortPostProcessors(currentRegistryProcessors, beanFactory);
 				registryProcessors.addAll(currentRegistryProcessors);
+				for (BeanDefinitionRegistryPostProcessor postProcessor : currentRegistryProcessors) {
+					logger.info("--------------第" + index + "次解析BeanDefinitionRegistryPostProcessor：" + postProcessor.getClass());
+				}
 				invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 				currentRegistryProcessors.clear();
+
+				index++;
 			}
 
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
