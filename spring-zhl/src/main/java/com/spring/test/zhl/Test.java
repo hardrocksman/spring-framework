@@ -15,6 +15,7 @@ public class Test {
 //		// 测试ClassPathXmlApplicationContext
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
 		//2.通过IOC容器对象来得到Helloworld对应的对象，利用bean id来唯一标识这个对象
+
 		OrderService orderService = applicationContext.getBean(OrderService.class);
 		MyOrder myOrder = orderService.getOrder(1);
 		System.out.println("result:" + myOrder);
