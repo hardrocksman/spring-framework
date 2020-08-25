@@ -16,6 +16,9 @@
 	<!--开启后允许使用 Spring AOP 的@AspectJ 注解 如果是纯 xml 配置 可以不用开启这个声明-->
 <!--	<aop:aspectj-autoproxy/>-->
 
+	<!--3.启动AOP注解：false是使用默认的java代理，true是使用CGLIB代理-->
+	<aop:aspectj-autoproxy proxy-target-class="false"/>
+
 	<!-- 1.配置目标对象 -->
 	<bean name="orderService" class="com.spring.test.zhl.service.impl.OrderServiceImpl"/>
 	<!-- 2.声明切面 -->
