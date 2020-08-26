@@ -25,6 +25,8 @@ import java.util.Map;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.aop.ProxyMethodInvocation;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.BridgeMethodResolver;
@@ -60,6 +62,8 @@ import org.springframework.lang.Nullable;
  * @see #getUserAttribute
  */
 public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Cloneable {
+
+	protected final Log logger = LogFactory.getLog(ReflectiveMethodInvocation.class);
 
 	protected final Object proxy;
 
@@ -160,6 +164,8 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 	public Object proceed() throws Throwable {
 		//	We start with an index of -1 and increment early.
 		if (this.currentInterceptorIndex == this.interceptorsAndDynamicMethodMatchers.size() - 1) {
+			// 最后一个interceptor
+			logger.info("----------execute the last interceptor-----------");
 			return invokeJoinpoint();
 		}
 
