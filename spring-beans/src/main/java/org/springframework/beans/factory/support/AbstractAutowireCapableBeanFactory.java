@@ -501,6 +501,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+			logger.info("-------------start execute PostProcessBeforeInstantiation for bean:" + beanName);
+			// 这里其实是从beanDefinition里面获取所有的InstantiationAwareBeanPostProcessor类
+			// 然后遍历执行 先调用该类的postProcessBeforeInstantiation  再是 postProcessAfterInitialization
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;
@@ -553,6 +556,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 		if (instanceWrapper == null) {
 			logger.info("-------------实例化bean:" + beanName);
+			// TODO ？？？？ 这里是干啥
 			instanceWrapper = createBeanInstance(beanName, mbd, args);
 		}
 		final Object bean = instanceWrapper.getWrappedInstance();
@@ -1774,10 +1778,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object wrappedBean = bean;
 		if (mbd == null || !mbd.isSynthetic()) {
+			logger.info("-------------start execute beanPostProcess PostprocessBeforeInitialization for bean:" + beanName);
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 
 		try {
+			// TODO 感觉这里应该是初始化阶段
+			logger.info("------------invoke init method for bean:" + beanName);
 			invokeInitMethods(beanName, wrappedBean, mbd);
 		}
 		catch (Throwable ex) {
@@ -1786,6 +1793,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					beanName, "Invocation of init method failed", ex);
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
+			logger.info("-------------start execute beanPostProcess PostprocessAfterInitialization for bean:" + beanName);
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 
