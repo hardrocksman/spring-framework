@@ -426,6 +426,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object result = existingBean;
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
+			logger.info("------------execute postProcessAfterInitialization for bean:" + beanName);
 			Object current = processor.postProcessAfterInitialization(result, beanName);
 			if (current == null) {
 				return result;
@@ -1106,6 +1107,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
+					logger.info("------------execute PostProcessBeforeInstantiation result:" + bean);
 					if (bean != null) {
 						bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
 					}
@@ -1132,6 +1134,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		for (BeanPostProcessor bp : getBeanPostProcessors()) {
 			if (bp instanceof InstantiationAwareBeanPostProcessor) {
 				InstantiationAwareBeanPostProcessor ibp = (InstantiationAwareBeanPostProcessor) bp;
+				logger.info("------------execute postProcessBeforeInstantiation for bean:" + beanName);
 				Object result = ibp.postProcessBeforeInstantiation(beanClass, beanName);
 				if (result != null) {
 					return result;
