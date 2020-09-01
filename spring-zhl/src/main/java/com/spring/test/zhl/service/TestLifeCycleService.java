@@ -1,4 +1,4 @@
-package com.spring.test.hardrock.service;
+package com.spring.test.zhl.service;
 
 public interface TestLifeCycleService {
 }

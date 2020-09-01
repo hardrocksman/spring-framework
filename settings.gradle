@@ -20,8 +20,8 @@ include "spring-webmvc"
 include "spring-webflux"
 include "spring-websocket"
 include "spring-framework-bom"
-include 'spring-hardrock'
 include 'spring-zhl'
+include 'spring-hardrock'
 
 // Exposes gradle buildSrc for IDE support
 include "buildSrc"

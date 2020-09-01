@@ -29,6 +29,8 @@
 	<!-- 2.声明切面 -->
 	<bean name="accountAdvice" class="com.spring.test.zhl.advice.AccountAdvice"/>
 
+	<bean name="testLifeCycleService" class="com.spring.test.zhl.service.impl.TestLifeCycleServiceImpl"/>
+
 	<!-- 3.配置将通知织入目标对象 -->
 	<aop:config>
 		<!--命名切入点 关于切入点更多表达式写法可以参见 README.md-->

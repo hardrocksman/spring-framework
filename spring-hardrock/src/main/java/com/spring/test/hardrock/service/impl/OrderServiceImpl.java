@@ -10,11 +10,12 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
 	@Autowired
 	TestDao testDao;
 
-	@Override
 	@Transactional
+	@Override
 	public boolean saveOrders(List<String> names) {
 		for (String name : names) {
 			testDao.insert(name);
