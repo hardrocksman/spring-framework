@@ -20,10 +20,10 @@ public class TestConfig {
 	@Bean
 	public DataSource dataSource() throws PropertyVetoException {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
-		dataSource.setUser("root");
-		dataSource.setPassword("root");
+		dataSource.setUser("hard");
+		dataSource.setPassword("Qq&l1314zyq");
 		dataSource.setDriverClass("com.mysql.jdbc.Driver");
-		dataSource.setJdbcUrl("jdbc:mysql://localhost:3307/test?serverTimezone=GMT%2B8&useSSL=false");
+		dataSource.setJdbcUrl("jdbc:mysql://rm-bp1756snr36av4lfufo.mysql.rds.aliyuncs.com:3306/test_tx?serverTimezone=GMT%2B8&useSSL=false");
 		return dataSource;
 	}
 

@@ -11,7 +11,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AopTest {
 
 	public static void main(String[] args) {
-//		System.out.println("test");
 //		// 测试ClassPathXmlApplicationContext
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
 		//2.通过IOC容器对象来得到Helloworld对应的对象，利用bean id来唯一标识这个对象

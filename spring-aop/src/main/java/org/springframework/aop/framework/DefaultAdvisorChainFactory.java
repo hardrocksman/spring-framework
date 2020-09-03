@@ -62,7 +62,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 		Advisor[] advisors = config.getAdvisors();
 
 		for (Advisor advisor : advisors) {
-			logger.info("-------------get all advisor:" + advisor.toString());
+			logger.info("-------------get all advisor:" + advisor.getAdvice().toString());
 		}
 
 		List<Object> interceptorList = new ArrayList<>(advisors.length);
