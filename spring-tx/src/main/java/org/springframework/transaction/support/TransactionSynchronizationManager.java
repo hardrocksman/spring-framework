@@ -77,22 +77,23 @@ import org.springframework.util.Assert;
 public abstract class TransactionSynchronizationManager {
 
 	private static final Log logger = LogFactory.getLog(TransactionSynchronizationManager.class);
-
+	//线程上下文中保存着【线程池对象：ConnectionHolder】的Map对象。线程可以通过该属性获取到同一个Connection对象。
+	// map的key为datasources
 	private static final ThreadLocal<Map<Object, Object>> resources =
 			new NamedThreadLocal<>("Transactional resources");
-
+	//事务同步器，是Spring交由程序员进行扩展的代码，每个线程可以注册N个事务同步器。
 	private static final ThreadLocal<Set<TransactionSynchronization>> synchronizations =
 			new NamedThreadLocal<>("Transaction synchronizations");
-
+	// 事务的名称
 	private static final ThreadLocal<String> currentTransactionName =
 			new NamedThreadLocal<>("Current transaction name");
-
+	// 事务是否是只读
 	private static final ThreadLocal<Boolean> currentTransactionReadOnly =
 			new NamedThreadLocal<>("Current transaction read-only status");
-
+	// 事务的隔离级别
 	private static final ThreadLocal<Integer> currentTransactionIsolationLevel =
 			new NamedThreadLocal<>("Current transaction isolation level");
-
+	// 事务是否开启   actual：真实的
 	private static final ThreadLocal<Boolean> actualTransactionActive =
 			new NamedThreadLocal<>("Actual transaction active");
 
