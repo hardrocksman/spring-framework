@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	   https://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--	<context:annotation-config/>-->
+<!--	<context:component-scan base-package="com.spring.test" />-->
+
+	<!--开启后允许使用 Spring AOP 的@AspectJ 注解 如果是纯 xml 配置 可以不用开启这个声明-->
+<!--	<aop:aspectj-autoproxy/>-->
+
+	<!--3.启动AOP注解：false是使用默认的java代理，true是使用CGLIB代理-->
+<!--	<aop:aspectj-autoproxy proxy-target-class="false"/>-->
+
+	<!-- 1.配置目标对象 -->
+	<bean name="testAService" class="com.spring.demo.service.impl.TestAServiceImpl"/>
+	<!-- 2.声明切面 -->
+	<bean name="testAAdvice" class="com.spring.demo.advice.TestAAdvice"/>
+
+	<!-- 1.配置目标对象 -->
+	<bean name="testBService" class="com.spring.demo.service.impl.TestBServiceImpl"/>
+	<!-- 2.声明切面 -->
+	<bean name="testBAdvice" class="com.spring.demo.advice.TestBAdvice"/>
+
+	<!-- 3.配置将通知织入目标对象 -->
+	<aop:config>
+		<!--命名切入点 关于切入点更多表达式写法可以参见 README.md-->
+		<aop:pointcut expression="execution(* com.spring.demo.service.TestAService.*(..))" id="aCutPoint"/>
+		<aop:aspect ref="testAAdvice">
+			<!-- 前置通知 -->
+			<aop:before method="before" pointcut-ref="aCutPoint"/>
+			<!-- 后置通知 如果需要拿到返回值 则要指明返回值对应的参数名称-->
+<!--			<aop:after-returning method="afterReturning" pointcut-ref="orderCutPoint" returning="result"/>-->
+			<!-- 环绕通知 -->
+<!--			<aop:around method="around" pointcut-ref="orderCutPoint"/>-->
+			<!-- 后置异常 如果需要拿到异常 则要指明异常对应的参数名称 -->
+<!--			<aop:after-throwing method="afterException" pointcut-ref="orderCutPoint" throwing="exception"/>-->
+			<!-- 最终通知 -->
+			<aop:after method="after" pointcut-ref="aCutPoint"/>
+		</aop:aspect>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* com.spring.demo.service.TestBService.*(..))" id="bCutPoint"/>
+		<aop:aspect ref="testBAdvice">
+			<!-- 前置通知 -->
+			<aop:before method="before" pointcut-ref="bCutPoint"/>
+<!--			&lt;!&ndash; 后置通知 如果需要拿到返回值 则要指明返回值对应的参数名称&ndash;&gt;-->
+<!--			<aop:after-returning method="afterReturning" pointcut-ref="accountCutPoint" returning="result"/>-->
+<!--			&lt;!&ndash; 环绕通知 &ndash;&gt;-->
+<!--			<aop:around method="around" pointcut-ref="orderCutPoint"/>-->
+<!--			&lt;!&ndash; 后置异常 如果需要拿到异常 则要指明异常对应的参数名称 &ndash;&gt;-->
+<!--			<aop:after-throwing method="afterException" pointcut-ref="accountCutPoint" throwing="exception"/>-->
+			<!-- 最终通知 -->
+			<aop:after method="after" pointcut-ref="bCutPoint"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

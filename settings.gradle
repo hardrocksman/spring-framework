@@ -22,6 +22,7 @@ include "spring-websocket"
 include "spring-framework-bom"
 include 'spring-zhl'
 include 'spring-hardrock'
+include 'spring-demo'
 
 // Exposes gradle buildSrc for IDE support
 include "buildSrc"
