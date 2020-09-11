@@ -6,6 +6,7 @@ public class TestAServiceImpl implements TestAService {
 
 	@Override
 	public void sayHello(String name) {
+		sayBye(name);
 		System.out.println("say hello to " + name + " in A");
 	}
 
