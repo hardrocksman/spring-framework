@@ -16,7 +16,7 @@ import java.beans.PropertyVetoException;
 
 @ComponentScan("com.spring.test.hardrock")
 @EnableTransactionManagement
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 public class TestConfig {
 
 	@Bean

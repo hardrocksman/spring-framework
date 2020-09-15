@@ -90,7 +90,8 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		this();
 		logger.info("先加载我们初始化传入AnnotationConfigApplicationContext的参数。。。");
 		register(annotatedClasses);
-
+		// 循环依赖开关
+//		setAllowCircularReferences(false);
 		ConfigurableListableBeanFactory beanFactory = this.getBeanFactory();
 		String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
 		for (String beanDefinitionName : beanDefinitionNames) {

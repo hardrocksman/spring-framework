@@ -23,6 +23,7 @@ include "spring-framework-bom"
 include 'spring-zhl'
 include 'spring-hardrock'
 include 'spring-demo'
+include 'spring-cycle'
 
 // Exposes gradle buildSrc for IDE support
 include "buildSrc"
