@@ -14,6 +14,7 @@ dependencies {
     compile(project(":spring-context"))
     compile(project(":spring-tx"))
     compile(project(":spring-jdbc"))
+    compile(project(":spring-aspects"))
 
     compile group: "com.mchange", name: "c3p0", version: "0.9.5.2"
     compile group: "mysql", name: "mysql-connector-java", version: "8.0.21"
