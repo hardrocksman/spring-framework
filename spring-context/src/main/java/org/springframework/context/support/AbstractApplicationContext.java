@@ -513,7 +513,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// Tell the subclass to refresh the internal bean factory.
 
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
-			logger.info("...........init beanFactory:" + beanFactory.toString());
+			logger.info("...........get beanFactory:" + beanFactory.toString());
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
 
@@ -526,6 +526,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
+				// 按照注释  这里才会去加载所有的bean  这里就是将BeanPostProcessor注册到beanFactory  还有一层分类
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
@@ -854,6 +855,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
 		// Initialize conversion service for this context.
 		logger.info("-------开始做实例化bean的准备工作--------");
+		// 1.初始化此上下文的转换服务
 		if (beanFactory.containsBean(CONVERSION_SERVICE_BEAN_NAME) &&
 				beanFactory.isTypeMatch(CONVERSION_SERVICE_BEAN_NAME, ConversionService.class)) {
 			beanFactory.setConversionService(
@@ -863,11 +865,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// Register a default embedded value resolver if no bean post-processor
 		// (such as a PropertyPlaceholderConfigurer bean) registered any before:
 		// at this point, primarily for resolution in annotation attribute values.
+		// 2.如果beanFactory之前没有注册嵌入值解析器，则注册默认的嵌入值解析器：主要用于注解属性值的解析
+		// 这里貌似是@Value注解的
 		if (!beanFactory.hasEmbeddedValueResolver()) {
 			beanFactory.addEmbeddedValueResolver(strVal -> getEnvironment().resolvePlaceholders(strVal));
 		}
 
 		// Initialize LoadTimeWeaverAware beans early to allow for registering their transformers early.
+		// 3.初始化LoadTimeWeaverAware Bean实例对象
 		String[] weaverAwareNames = beanFactory.getBeanNamesForType(LoadTimeWeaverAware.class, false, false);
 		for (String weaverAwareName : weaverAwareNames) {
 			getBean(weaverAwareName);
@@ -877,6 +882,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.setTempClassLoader(null);
 
 		// Allow for caching all bean definition metadata, not expecting further changes.
+		// 4.冻结所有bean定义，注册的bean定义不会被修改或进一步后处理，因为马上要创建 Bean 实例对象了
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.

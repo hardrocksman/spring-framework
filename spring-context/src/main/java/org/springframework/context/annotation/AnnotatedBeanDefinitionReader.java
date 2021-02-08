@@ -136,7 +136,7 @@ public class AnnotatedBeanDefinitionReader {
 	 */
 	public void register(Class<?>... annotatedClasses) {
 		for (Class<?> annotatedClass : annotatedClasses) {
-			logger.info("register bean on annotatedClass:" + annotatedClass);
+			logger.info("----------------------register bean on annotatedClass:" + annotatedClass);
 			registerBean(annotatedClass);
 		}
 	}
@@ -257,7 +257,7 @@ public class AnnotatedBeanDefinitionReader {
 	<T> void doRegisterBean(Class<T> annotatedClass, @Nullable Supplier<T> instanceSupplier, @Nullable String name,
 			@Nullable Class<? extends Annotation>[] qualifiers, BeanDefinitionCustomizer... definitionCustomizers) {
 		// 根据指定的注解Bean定义类，创建Spring容器中对注解Bean的封装的
-		logger.info("根据传入的一个配置类");
+		logger.info("-------------------根据传入的一个配置类[config]：" + annotatedClass.getName());
 		//根据指定的注解Bean定义类，创建Spring容器中对注解Bean的封装的数据结构
 		AnnotatedGenericBeanDefinition abd = new AnnotatedGenericBeanDefinition(annotatedClass);
 		if (this.conditionEvaluator.shouldSkip(abd.getMetadata())) {
